@@ -1,7 +1,10 @@
+from tokenize import String
 from django.http import HttpResponse
 from django.template import loader
+from django.shortcuts import get_object_or_404
 
-from .models import Instructor, Language
+
+from .models import Instructor, Language, Course
 
 
 def index(request):
@@ -16,6 +19,13 @@ def list(request, language=None):
     instructors = None
 
     ### Task 3: Get instructors from database and filter them based on the language
+
+    if language:
+        ##l=Language.objects.get(code=language)
+        l=get_object_or_404(Language, code=language) 
+        instructors = Instructor.objects.filter(languages__in=[l])
+    else:
+        instructors = Instructor.objects.all()
 
     ### Task 3 - End
 

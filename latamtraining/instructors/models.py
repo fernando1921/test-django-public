@@ -3,8 +3,13 @@ from django.db import models
 
 ### Task 1: Create here the Model Course here
 class Course(models.Model):
-    None
+    name = models.CharField(max_length=200)
+    sku = models.CharField(max_length=200) 
+    page = models.CharField(max_length=200) 
+    
 
+    def __str__(self):
+        return self.name
 
 ### Task 1 - End
 
@@ -25,7 +30,7 @@ class Instructor(models.Model):
     languages = models.ManyToManyField(Language)
 
     ### Task 2: Create here the courses field using ManyToManyField
-
+    courses = models.ManyToManyField(Course)
     ### Task 2 - End
 
     def __str__(self):
